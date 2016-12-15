@@ -16,6 +16,9 @@
 
 package org.kaaproject.kaa.demo.iotworld.climate;
 
+import android.app.Application;
+
+import org.greenrobot.eventbus.EventBus;
 import org.kaaproject.kaa.client.AndroidKaaPlatformContext;
 import org.kaaproject.kaa.client.Kaa;
 import org.kaaproject.kaa.client.KaaClient;
@@ -24,9 +27,6 @@ import org.kaaproject.kaa.client.SimpleKaaClientStateListener;
 import org.kaaproject.kaa.demo.iotworld.climate.data.event.KaaStartedEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import android.app.Application;
-import de.greenrobot.event.EventBus;
 
 public class ClimateControlApplication extends Application {
 

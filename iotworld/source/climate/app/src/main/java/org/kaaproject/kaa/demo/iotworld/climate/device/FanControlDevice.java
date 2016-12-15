@@ -14,28 +14,27 @@
  *  limitations under the License.
  */
 
-package org.kaaproject.kaa.demo.iotworld.climate.deivce;
+package org.kaaproject.kaa.demo.iotworld.climate.device;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.greenrobot.eventbus.EventBus;
 import org.kaaproject.kaa.client.KaaClient;
-import org.kaaproject.kaa.demo.iotworld.DeviceEventClassFamily;
-import org.kaaproject.kaa.demo.iotworld.FanEventClassFamily;
 import org.kaaproject.kaa.demo.iotworld.climate.data.event.FunControlUpdatedEvent;
 import org.kaaproject.kaa.demo.iotworld.device.DeviceChangeNameRequest;
+import org.kaaproject.kaa.demo.iotworld.device.DeviceEventClassFamilyV2;
 import org.kaaproject.kaa.demo.iotworld.device.DeviceInfo;
 import org.kaaproject.kaa.demo.iotworld.device.DeviceInfoRequest;
 import org.kaaproject.kaa.demo.iotworld.device.DeviceInfoResponse;
 import org.kaaproject.kaa.demo.iotworld.device.DeviceStatusSubscriptionRequest;
+import org.kaaproject.kaa.demo.iotworld.device.FanEventClassFamilyV2;
 import org.kaaproject.kaa.demo.iotworld.fan.FanStatus;
 import org.kaaproject.kaa.demo.iotworld.fan.FanStatusUpdate;
 import org.kaaproject.kaa.demo.iotworld.fan.SwitchRequest;
 
-import de.greenrobot.event.EventBus;
+import java.util.ArrayList;
+import java.util.List;
 
-public class FanControlDevice implements DeviceEventClassFamily.Listener,
-                                         FanEventClassFamily.Listener {
+public class FanControlDevice implements DeviceEventClassFamilyV2.Listener,
+                                         FanEventClassFamilyV2.Listener {
 
     public static List<String> FAN_CONTROL_FQNS = new ArrayList<>();
     
@@ -52,8 +51,8 @@ public class FanControlDevice implements DeviceEventClassFamily.Listener,
     private final KaaClient mClient;
     private final EventBus mEventBus;
     
-    private final DeviceEventClassFamily mDeviceEventClassFamily;
-    private final FanEventClassFamily mFanEventClassFamily;
+    private final DeviceEventClassFamilyV2 mDeviceEventClassFamily;
+    private final FanEventClassFamilyV2 mFanEventClassFamily;
     
     
     public FanControlDevice(String endpointKey,
@@ -62,8 +61,8 @@ public class FanControlDevice implements DeviceEventClassFamily.Listener,
         mEndpointKey = endpointKey;
         mClient = client;
         mEventBus = eventBus;
-        mDeviceEventClassFamily = mClient.getEventFamilyFactory().getDeviceEventClassFamily();
-        mFanEventClassFamily = mClient.getEventFamilyFactory().getFanEventClassFamily();
+        mDeviceEventClassFamily = mClient.getEventFamilyFactory().getDeviceEventClassFamilyV2();
+        mFanEventClassFamily = mClient.getEventFamilyFactory().getFanEventClassFamilyV2();
         mDeviceEventClassFamily.addListener(this);
         mFanEventClassFamily.addListener(this);
         requestDeviceInfo();
@@ -81,7 +80,12 @@ public class FanControlDevice implements DeviceEventClassFamily.Listener,
             mDeviceEventClassFamily.sendEvent(new DeviceStatusSubscriptionRequest(), mEndpointKey);
         }
     }
-    
+
+    @Override
+    public void onEvent(SwitchRequest switchRequest, String s) {
+
+    }
+
     @Override
     public void onEvent(FanStatusUpdate fanStatusUpdate, String endpointKey) {
         if (mEndpointKey.equals(endpointKey)) {

@@ -16,7 +16,7 @@
 
 package org.kaaproject.kaa.demo.iotworld.climate.data.event;
 
-import de.greenrobot.event.EventBus;
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * A superclass for all application events dispatched via {@link EventBus}.

@@ -16,11 +16,11 @@
 
 package org.kaaproject.kaa.demo.iotworld.climate.util;
 
-import java.util.EnumMap;
-import java.util.Map;
-
 import android.content.Context;
 import android.graphics.Typeface;
+
+import java.util.EnumMap;
+import java.util.Map;
 
 public class FontUtils {
     
@@ -38,12 +38,13 @@ public class FontUtils {
         }
     }
     
-    private static Map<FontType, Typeface> typefaceCache = new EnumMap<FontType, Typeface>(FontType.class);
+    private static Map<FontType, Typeface> typefaceCache = new EnumMap<>(FontType.class);
     
     public static Typeface getTypeface(Context context, FontType fontType, boolean previewMode) {
         String fontPath = fontType.getPath();
+
         if (!typefaceCache.containsKey(fontType)) {
-            Typeface typeface = null;
+            Typeface typeface;
             if (previewMode) {
                 typeface = Typeface.SANS_SERIF;
             } else {

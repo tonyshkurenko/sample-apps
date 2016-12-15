@@ -16,22 +16,22 @@
 
 package org.kaaproject.kaa.demo.iotworld.climate.fragment;
 
-import org.kaaproject.kaa.demo.iotworld.climate.ClimateControlActivity;
-import org.kaaproject.kaa.demo.iotworld.climate.ClimateControlApplication;
-import org.kaaproject.kaa.demo.iotworld.climate.ClimateController;
-import org.kaaproject.kaa.demo.iotworld.climate.R;
-import org.kaaproject.kaa.demo.iotworld.climate.data.event.ThermostatUpdatedEvent;
-import org.kaaproject.kaa.demo.iotworld.climate.deivce.ThermostatDevice;
-import org.kaaproject.kaa.demo.iotworld.climate.widget.Thermostat;
-import org.kaaproject.kaa.demo.iotworld.climate.widget.Thermostat.OnThermostatChangeListener;
-import org.kaaproject.kaa.demo.iotworld.thermo.ThermostatInfo;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import org.kaaproject.kaa.demo.iotworld.climate.ClimateControlActivity;
+import org.kaaproject.kaa.demo.iotworld.climate.ClimateControlApplication;
+import org.kaaproject.kaa.demo.iotworld.climate.ClimateController;
+import org.kaaproject.kaa.demo.iotworld.climate.R;
+import org.kaaproject.kaa.demo.iotworld.climate.data.event.ThermostatUpdatedEvent;
+import org.kaaproject.kaa.demo.iotworld.climate.device.ThermostatDevice;
+import org.kaaproject.kaa.demo.iotworld.climate.widget.Thermostat;
+import org.kaaproject.kaa.demo.iotworld.climate.widget.Thermostat.OnThermostatChangeListener;
+import org.kaaproject.kaa.demo.iotworld.thermo.ThermostatInfo;
 
 public class ThermostatFragment extends Fragment implements OnThermostatChangeListener {
 

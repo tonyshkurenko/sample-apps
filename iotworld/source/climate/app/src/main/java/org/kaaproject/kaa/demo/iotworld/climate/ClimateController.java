@@ -16,6 +16,13 @@
 
 package org.kaaproject.kaa.demo.iotworld.climate;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.kaaproject.kaa.client.KaaClient;
 import org.kaaproject.kaa.client.event.registration.AttachEndpointToUserCallback;
 import org.kaaproject.kaa.client.event.registration.DetachEndpointFromUserCallback;
@@ -25,12 +32,7 @@ import org.kaaproject.kaa.common.endpoint.gen.UserAttachResponse;
 import org.kaaproject.kaa.demo.iotworld.climate.data.event.KaaStartedEvent;
 import org.kaaproject.kaa.demo.iotworld.climate.data.event.UserAttachEvent;
 import org.kaaproject.kaa.demo.iotworld.climate.data.event.UserDetachEvent;
-import org.kaaproject.kaa.demo.iotworld.climate.deivce.ThermostatDevice;
-
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import de.greenrobot.event.EventBus;
+import org.kaaproject.kaa.demo.iotworld.climate.device.ThermostatDevice;
 
 public class ClimateController implements UserAttachCallback, AttachEndpointToUserCallback, DetachEndpointFromUserCallback {
 
@@ -54,7 +56,8 @@ public class ClimateController implements UserAttachCallback, AttachEndpointToUs
         mClient.setDetachedListener(this);
         mClient.setEndpointAccessToken(DEFAULT_CLIMATE_CONTROL_ACCESS_TOKEN);
     }
-    
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(KaaStartedEvent kaaStarted) {
         if (!mClient.isAttachedToUser()) {
             mClient.attachUser("kaa", "dummy", this);
