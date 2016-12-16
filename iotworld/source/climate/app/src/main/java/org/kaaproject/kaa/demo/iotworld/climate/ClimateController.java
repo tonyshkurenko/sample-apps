@@ -60,7 +60,7 @@ public class ClimateController implements UserAttachCallback, AttachEndpointToUs
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(KaaStartedEvent kaaStarted) {
         if (!mClient.isAttachedToUser()) {
-            mClient.attachUser("kaa", "dummy", this);
+            mClient.attachUser("kaa", "kaa", this);
         } else {
             mEventBus.post(new UserAttachEvent());
         }

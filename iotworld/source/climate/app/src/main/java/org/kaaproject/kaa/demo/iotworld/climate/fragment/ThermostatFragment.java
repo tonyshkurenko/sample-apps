@@ -23,6 +23,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.kaaproject.kaa.demo.iotworld.climate.ClimateControlActivity;
 import org.kaaproject.kaa.demo.iotworld.climate.ClimateControlApplication;
 import org.kaaproject.kaa.demo.iotworld.climate.ClimateController;
@@ -92,7 +94,8 @@ public class ThermostatFragment extends Fragment implements OnThermostatChangeLi
     public String getFragmentTag() {
         return ThermostatFragment.class.getSimpleName();
     }
-    
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(ThermostatUpdatedEvent thermostatUpdatedEvent) {
         ThermostatInfo thermostatInfo = mThermostatDevice.getThermostatInfo();
         mThermostat.setTemp(thermostatInfo.getDegree());
